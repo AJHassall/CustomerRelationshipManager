@@ -5,7 +5,7 @@ namespace ContactManagementApi.Models
     public class Fund
     {
         [Key]
-        public int FundId { get;}
+        public int FundId { get; private set;}
 
         [Required]
         [MinLength(3)]

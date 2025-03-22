@@ -8,10 +8,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="FluentValidation" Version="11.11.0" />
+    <PackageReference Include="Microsoft.AspNet.WebApi" Version="5.3.0" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.12" NoWarn="NU1605" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" Version="8.0.12" NoWarn="NU1605" />
-    <PackageReference Include="Microsoft.Identity.Web" Version="3.2.0"/>
-    <PackageReference Include="Microsoft.Identity.Web.DownstreamApi" Version="3.2.0"/>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.3">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="9.0.3" />
+    <PackageReference Include="Microsoft.Identity.Web" Version="3.2.0" />
+    <PackageReference Include="Microsoft.Identity.Web.DownstreamApi" Version="3.2.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2" />
   </ItemGroup>
 

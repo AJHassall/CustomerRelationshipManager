@@ -6,7 +6,7 @@ namespace ContactManagementApi.Models
     public class ContactFundAssignment
     {
         [Key]
-        public int ContactFundAssignmentId { get; set; }
+        public int ContactFundAssignmentId { get;  }
 
         [Required]
         public int ContactId { get; set; }

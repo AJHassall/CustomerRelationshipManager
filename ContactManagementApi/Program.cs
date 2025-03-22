@@ -15,8 +15,12 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 
+// builder.Services.AddDbContext<ContactManagementApi.Data.ContactDbContext>(options =>
+//     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"))
+// );
+
 builder.Services.AddDbContext<ContactManagementApi.Data.ContactDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"))
+    options.UseInMemoryDatabase("ContactManagementDb")
 );
 
 // Register Repositories

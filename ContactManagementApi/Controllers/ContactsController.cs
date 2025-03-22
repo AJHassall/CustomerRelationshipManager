@@ -11,12 +11,10 @@ namespace ContactManagementApi.Controllers
     public class ContactsController : ControllerBase
     {
         private readonly ContactService _contactService;
-        private readonly IValidator<Contact> _contactValidator;
 
-        public ContactsController(ContactService contactService, IValidator<Contact> contactValidator)
+        public ContactsController(ContactService contactService)
         {
             _contactService = contactService;
-            _contactValidator = contactValidator;
         }
 
         [HttpGet("{id}")]
@@ -33,13 +31,6 @@ namespace ContactManagementApi.Controllers
         [HttpPost]
         public IActionResult CreateContact([FromBody] Contact contact)
         {
-            var validationResult = _contactValidator.Validate(contact);
-
-            if (!validationResult.IsValid)
-            {
-                return BadRequest(validationResult.Errors);
-            }
-
             var createdContact = _contactService.CreateContact(contact);
             return CreatedAtAction(nameof(GetContactById), new { id = createdContact.ContactId }, createdContact);
         }
@@ -50,13 +41,6 @@ namespace ContactManagementApi.Controllers
             if (id != contact.ContactId)
             {
                 return BadRequest("Contact ID mismatch.");
-            }
-
-            var validationResult = _contactValidator.Validate(contact);
-
-            if (!validationResult.IsValid)
-            {
-                return BadRequest(validationResult.Errors);
             }
 
             var updatedContact = _contactService.UpdateContact(contact);

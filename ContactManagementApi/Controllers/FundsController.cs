@@ -11,12 +11,10 @@ namespace FundManagementApi.Controllers
     public class FundsController : ControllerBase
     {
         private readonly FundService _fundService;
-        private readonly IValidator<Fund> _fundValidator;
 
-        public FundsController(FundService fundService, IValidator<Fund> fundValidator)
+        public FundsController(FundService fundService)
         {
             _fundService = fundService;
-            _fundValidator = fundValidator;
         }
 
         [HttpGet("{id}")]
@@ -33,12 +31,7 @@ namespace FundManagementApi.Controllers
         [HttpPost]
         public IActionResult CreateFund([FromBody] Fund fund)
         {
-            var validationResult = _fundValidator.Validate(fund);
 
-            if (!validationResult.IsValid)
-            {
-                return BadRequest(validationResult.Errors);
-            }
 
             var createdFund = _fundService.CreateFund(fund);
             return CreatedAtAction(nameof(GetFundById), new { id = createdFund.FundId }, createdFund);
@@ -50,13 +43,6 @@ namespace FundManagementApi.Controllers
             if (id != fund.FundId)
             {
                 return BadRequest("Fund ID mismatch.");
-            }
-
-            var validationResult = _fundValidator.Validate(fund);
-
-            if (!validationResult.IsValid)
-            {
-                return BadRequest(validationResult.Errors);
             }
 
             var updatedFund = _fundService.UpdateFund(fund);

@@ -22,6 +22,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<ContactManagementApi.Data.ContactDbContext>(options =>
     options.UseInMemoryDatabase("ContactManagementDb")
 );
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 // Register Repositories
 builder.Services.AddScoped<IContactRepository, ContactRepository>();
@@ -30,6 +31,7 @@ builder.Services.AddScoped<IFundRepository, FundRepository>();
 //Register Services
 builder.Services.AddScoped<IContactService, ContactService>();
 builder.Services.AddScoped<IFundService, FundService>();
+
 
 // Add CORS services
 builder.Services.AddCors(options =>

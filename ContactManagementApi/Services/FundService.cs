@@ -6,36 +6,36 @@ namespace ContactManagementApi.Services
 {
     public class FundService : IFundService
     {
-        private readonly IFundRepository _fundRepository;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public FundService(IFundRepository fundRepository)
+        public FundService(IUnitOfWork fundRepository)
         {
-            _fundRepository = fundRepository;
+            _unitOfWork = fundRepository;
         }
 
         public Fund GetFundById(int id)
         {
-            return _fundRepository.GetFundById(id);
+            return _unitOfWork.Funds.GetFundById(id);
         }
 
         public IEnumerable<Fund> GetAllFunds()
         {
-            return _fundRepository.GetAllFunds();
+            return _unitOfWork.Funds.GetAllFunds();
         }
 
         public Fund CreateFund(Fund fund)
         {
-            return _fundRepository.CreateFund(fund);
+            return _unitOfWork.Funds.CreateFund(fund);
         }
 
         public Fund UpdateFund(Fund fund)
         {
-            return _fundRepository.UpdateFund(fund);
+            return _unitOfWork.Funds.UpdateFund(fund);
         }
 
         public void DeleteFund(int id)
         {
-            _fundRepository.DeleteFund(id);
+            _unitOfWork.Funds.DeleteFund(id);
         }
     }
 }

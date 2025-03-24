@@ -6,7 +6,7 @@ using System.Linq;
 using ContactManagementApi.Models;
 
 [TestFixture] 
-public class ContactRepositoryTests
+public class FundRelationshipsRepositoryTests
 {
     
 }

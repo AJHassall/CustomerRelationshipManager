@@ -26,14 +26,14 @@ namespace ContactManagementApi.Tests.Services
             // Arrange
             int contactId = 1;
             int fundId = 2;
-            _mockContactRepository.Setup(uow => uow.Contacts.GetContactFundAssignment(contactId, fundId)).Returns((ContactFundAssignment)null);
-            _mockContactRepository.Setup(uow => uow.Contacts.CreateContactFundAssignment(It.IsAny<ContactFundAssignment>()));
+            _mockContactRepository.Setup(uow => uow.FundRelationships.GetContactFundAssignment(contactId, fundId)).Returns((ContactFundAssignment)null);
+            _mockContactRepository.Setup(uow => uow.FundRelationships.CreateContactFundAssignment(It.IsAny<ContactFundAssignment>()));
 
             // Act
             _contactService.AssignContactToFund(contactId, fundId);
 
             // Assert
-            _mockContactRepository.Verify(uow => uow.Contacts.CreateContactFundAssignment(It.Is<ContactFundAssignment>(a => a.ContactId == contactId && a.FundId == fundId)), Times.Once);
+            _mockContactRepository.Verify(uow => uow.FundRelationships.CreateContactFundAssignment(It.Is<ContactFundAssignment>(a => a.ContactId == contactId && a.FundId == fundId)), Times.Once);
         }
 
         [Test]
@@ -42,11 +42,11 @@ namespace ContactManagementApi.Tests.Services
             // Arrange
             int contactId = 1;
             int fundId = 2;
-            _mockContactRepository.Setup(uow => uow.Contacts.GetContactFundAssignment(contactId, fundId)).Returns(new ContactFundAssignment());
+            _mockContactRepository.Setup(uow => uow.FundRelationships.GetContactFundAssignment(contactId, fundId)).Returns(new ContactFundAssignment());
 
             // Act & Assert
             Assert.Throws<InvalidOperationException>(() => _contactService.AssignContactToFund(contactId, fundId));
-            _mockContactRepository.Verify(uow => uow.Contacts.CreateContactFundAssignment(It.IsAny<ContactFundAssignment>()), Times.Never);
+            _mockContactRepository.Verify(uow => uow.FundRelationships.CreateContactFundAssignment(It.IsAny<ContactFundAssignment>()), Times.Never);
         }
     }
 }

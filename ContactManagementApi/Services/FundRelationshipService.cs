@@ -5,41 +5,14 @@ using ContactManagementApi.Data.Repositories;
 
 namespace ContactManagementApi.Services
 {
-    public class ContactService : IContactService
+    public class FundRelationshipService : IFundRelationshipService
     {
         private readonly IUnitOfWork _unitOfWork;
 
-        public ContactService(IUnitOfWork unitOfWork)
+        public FundRelationshipService(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
         }
-
-        public Contact CreateContact(Contact contact)
-        {
-            return _unitOfWork.Contacts.CreateContact(contact);
-        }
-
-        public Contact GetContactById(int id)
-        {
-            return _unitOfWork.Contacts.GetContactById(id);
-        }
-
-        public Contact UpdateContact(Contact contact)
-        {
-            return _unitOfWork.Contacts.UpdateContact(contact);
-        }
-
-        public void DeleteContact(int id)
-        {
-            if (_unitOfWork.FundRelationships.GetContactFundAssignment(id, 0) != null)
-            {
-                throw new InvalidOperationException("Contact is currently assigned to a fund and cannot be deleted.");
-            }
-
-            _unitOfWork.Contacts.DeleteContact(id);
-            _unitOfWork.Complete();
-        }
-
         public IEnumerable<Contact> GetContactsByFundId(int fundId)
         {
             return _unitOfWork.FundRelationships.GetContactsByFundId(fundId);
@@ -60,7 +33,6 @@ namespace ContactManagementApi.Services
 
             _unitOfWork.FundRelationships.CreateContactFundAssignment(assignment);
             _unitOfWork.Complete();
-
         }
 
         public void RemoveContactFromFund(int contactId, int fundId)
@@ -72,11 +44,8 @@ namespace ContactManagementApi.Services
             }
 
             _unitOfWork.FundRelationships.DeleteContactFundAssignment(assignment);
+            _unitOfWork.Complete();
         }
 
-        public IEnumerable<Contact> GetContacts()
-        {
-            return _unitOfWork.Contacts.GetContacts();
-        }
     }
 }

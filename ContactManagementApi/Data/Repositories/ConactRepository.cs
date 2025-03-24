@@ -57,24 +57,6 @@ namespace ContactManagementApi.Data.Repositories
                 .ToList();
         }
 
-        public ContactFundAssignment GetContactFundAssignment(int contactId, int fundId)
-        {
-            return _context.ContactFundAssignments.Where(x => x.ContactId == contactId && x.FundId == fundId).FirstOrDefault();
-        }
-
-        public ContactFundAssignment CreateContactFundAssignment(ContactFundAssignment contactFundAssignment)
-        {
-            _context.ContactFundAssignments.Add(contactFundAssignment);
-            _context.SaveChanges();
-            return contactFundAssignment;
-        }
-
-        public void DeleteContactFundAssignment(ContactFundAssignment contactFundAssignment)
-        {
-            _context.ContactFundAssignments.Remove(contactFundAssignment);
-            _context.SaveChanges();
-        }
-
         public IQueryable<Contact> GetContacts()
         {
             return _context.Contacts;

@@ -5,11 +5,11 @@ using ContactManagementApi.Data.Repositories;
 
 namespace ContactManagementApi.Services
 {
-    public class ContactService
+    public class ContactService : IContactService
     {
-        private readonly ContactRepository _contactRepository;
+        private readonly IContactRepository _contactRepository;
 
-        public ContactService(ContactRepository contactRepository)
+        public ContactService(IContactRepository contactRepository)
         {
             _contactRepository = contactRepository;
         }
@@ -31,7 +31,7 @@ namespace ContactManagementApi.Services
 
         public void DeleteContact(int id)
         {
-            if (_contactRepository.GetContactFundAssignment(id, 0) != null) //check if contact is assigned.
+            if (_contactRepository.GetContactFundAssignment(id, 0) != null)
             {
                 throw new InvalidOperationException("Contact is currently assigned to a fund and cannot be deleted.");
             }
@@ -69,6 +69,11 @@ namespace ContactManagementApi.Services
             }
 
             _contactRepository.DeleteContactFundAssignment(assignment);
+        }
+
+        public IEnumerable<Contact> GetContacts()
+        {
+            return _contactRepository.GetContacts();
         }
     }
 }

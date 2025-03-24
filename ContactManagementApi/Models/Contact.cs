@@ -7,6 +7,7 @@ namespace ContactManagementApi.Models
         [Key]
         public int ContactId { get; private set; }
 
+        [Required]
         [MinLength(3)]
         public required string Name { get; set; }
 

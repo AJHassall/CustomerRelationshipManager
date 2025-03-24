@@ -10,11 +10,22 @@ namespace ContactManagementApi.Controllers
     [Route("api/contacts")]
     public class ContactsController : ControllerBase
     {
-        private readonly ContactService _contactService;
+        private readonly IContactService _contactService;
 
-        public ContactsController(ContactService contactService)
+        public ContactsController(IContactService contactService)
         {
             _contactService = contactService;
+        }
+
+        [HttpGet]
+        public IActionResult GetContacts()
+        {
+            var contact = _contactService.GetContacts();
+            if (contact == null)
+            {
+                return NotFound();
+            }
+            return Ok(contact);
         }
 
         [HttpGet("{id}")]
@@ -31,17 +42,24 @@ namespace ContactManagementApi.Controllers
         [HttpPost]
         public IActionResult CreateContact([FromBody] Contact contact)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
             var createdContact = _contactService.CreateContact(contact);
+
+            if (createdContact == null)
+            {
+                return BadRequest();
+            }
+
             return CreatedAtAction(nameof(GetContactById), new { id = createdContact.ContactId }, createdContact);
         }
 
         [HttpPut("{id}")]
         public IActionResult UpdateContact(int id, [FromBody] Contact contact)
         {
-            if (id != contact.ContactId)
-            {
-                return BadRequest("Contact ID mismatch.");
-            }
 
             var updatedContact = _contactService.UpdateContact(contact);
             if (updatedContact == null)
@@ -60,7 +78,7 @@ namespace ContactManagementApi.Controllers
                 _contactService.DeleteContact(id);
                 return NoContent();
             }
-            catch (System.InvalidOperationException ex)
+            catch (InvalidOperationException ex)
             {
                 return BadRequest(ex.Message);
             }
@@ -82,7 +100,7 @@ namespace ContactManagementApi.Controllers
                 _contactService.AssignContactToFund(contactId, fundId);
                 return NoContent();
             }
-            catch(System.InvalidOperationException ex)
+            catch(InvalidOperationException ex)
             {
                 return BadRequest(ex.Message);
             }
@@ -96,7 +114,7 @@ namespace ContactManagementApi.Controllers
                 _contactService.RemoveContactFromFund(contactId, fundId);
                 return NoContent();
             }
-            catch(System.InvalidOperationException ex)
+            catch(InvalidOperationException ex)
             {
                 return BadRequest(ex.Message);
             }

@@ -6,7 +6,7 @@ using ContactManagementApi.Data;
 
 namespace ContactManagementApi.Data.Repositories
 {
-    public class ContactRepository
+    public class ContactRepository: IContactRepository
     {
         private readonly ContactDbContext _context;
 
@@ -75,5 +75,10 @@ namespace ContactManagementApi.Data.Repositories
             _context.SaveChanges();
         }
 
+        public IQueryable<Contact> GetContacts()
+        {
+            return _context.Contacts;
+
+        }
     }
 }

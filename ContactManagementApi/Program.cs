@@ -24,14 +24,26 @@ builder.Services.AddDbContext<ContactManagementApi.Data.ContactDbContext>(option
 );
 
 // Register Repositories
-builder.Services.AddScoped<ContactRepository>();
-builder.Services.AddScoped<FundRepository>();
+builder.Services.AddScoped<IContactRepository, ContactRepository>();
+builder.Services.AddScoped<IFundRepository, FundRepository>();
 
-// Register Services
-builder.Services.AddScoped<ContactService>();
-builder.Services.AddScoped<FundService>();
+//Register Services
+builder.Services.AddScoped<IContactService, ContactService>();
+builder.Services.AddScoped<IFundService, FundService>();
+
+// Add CORS services
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowClient",
+        builder => builder.WithOrigins("http://localhost:5173") 
+                          .AllowAnyMethod() 
+                          .AllowAnyHeader());
+});
+
 
 var app = builder.Build();
+
+app.UseCors("AllowClient");
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

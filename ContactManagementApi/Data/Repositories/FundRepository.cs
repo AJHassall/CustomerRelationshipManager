@@ -6,7 +6,7 @@ using ContactManagementApi.Data;
 
 namespace ContactManagementApi.Data.Repositories
 {
-    public class FundRepository
+    public class FundRepository: IFundRepository
     {
         private readonly ContactDbContext _context;
 

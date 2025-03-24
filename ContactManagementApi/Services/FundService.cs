@@ -4,11 +4,11 @@ using ContactManagementApi.Data.Repositories;
 
 namespace ContactManagementApi.Services
 {
-    public class FundService
+    public class FundService : IFundService
     {
-        private readonly FundRepository _fundRepository;
+        private readonly IFundRepository _fundRepository;
 
-        public FundService(FundRepository fundRepository)
+        public FundService(IFundRepository fundRepository)
         {
             _fundRepository = fundRepository;
         }
@@ -25,7 +25,6 @@ namespace ContactManagementApi.Services
 
         public Fund CreateFund(Fund fund)
         {
-            // Add any business logic before creating the fund
             return _fundRepository.CreateFund(fund);
         }
 

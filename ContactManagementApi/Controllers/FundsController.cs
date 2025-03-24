@@ -2,17 +2,16 @@ using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using ContactManagementApi.Models;
 using ContactManagementApi.Services;
-using FluentValidation;
 
-namespace FundManagementApi.Controllers
+namespace ContactManagementApi.Controllers
 {
     [ApiController]
     [Route("api/funds")]
     public class FundsController : ControllerBase
     {
-        private readonly FundService _fundService;
+        private readonly IFundService _fundService;
 
-        public FundsController(FundService fundService)
+        public FundsController(IFundService fundService)
         {
             _fundService = fundService;
         }
@@ -31,8 +30,6 @@ namespace FundManagementApi.Controllers
         [HttpPost]
         public IActionResult CreateFund([FromBody] Fund fund)
         {
-
-
             var createdFund = _fundService.CreateFund(fund);
             return CreatedAtAction(nameof(GetFundById), new { id = createdFund.FundId }, createdFund);
         }
@@ -62,7 +59,7 @@ namespace FundManagementApi.Controllers
                 _fundService.DeleteFund(id);
                 return NoContent();
             }
-            catch (System.InvalidOperationException ex)
+            catch (InvalidOperationException ex)
             {
                 return BadRequest(ex.Message);
             }

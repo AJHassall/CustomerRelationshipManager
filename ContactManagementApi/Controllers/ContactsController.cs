@@ -84,41 +84,5 @@ namespace ContactManagementApi.Controllers
             }
 
         }
-
-        [HttpGet("fund/{fundId}")]
-        public IActionResult GetContactsByFundId(int fundId)
-        {
-            var contacts = _contactService.GetContactsByFundId(fundId);
-            return Ok(contacts);
-        }
-
-        [HttpPost("{contactId}/funds/{fundId}")]
-        public IActionResult AssignContactToFund(int contactId, int fundId)
-        {
-            try
-            {
-                _contactService.AssignContactToFund(contactId, fundId);
-                return NoContent();
-            }
-            catch(InvalidOperationException ex)
-            {
-                return BadRequest(ex.Message);
-            }
-        }
-
-        [HttpDelete("{contactId}/funds/{fundId}")]
-        public IActionResult RemoveContactFromFund(int contactId, int fundId)
-        {
-            try
-            {
-                _contactService.RemoveContactFromFund(contactId, fundId);
-                return NoContent();
-            }
-            catch(InvalidOperationException ex)
-            {
-                return BadRequest(ex.Message);
-            }
-
-        }
     }
 }

@@ -6,7 +6,7 @@ using ContactManagementApi.Services;
 namespace ContactManagementApi.Controllers
 {
     [ApiController]
-    [Route("api/funds")]
+    [Route("api/fundrelationship")]
     public class FundRelationshipController : ControllerBase
     {
         private readonly IFundRelationshipService _fundRelationshipService;

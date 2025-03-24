@@ -27,10 +27,14 @@ builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 // Register Repositories
 builder.Services.AddScoped<IContactRepository, ContactRepository>();
 builder.Services.AddScoped<IFundRepository, FundRepository>();
+builder.Services.AddScoped<IFundRelationshipRepository, FundRelationshipRepository>();
+
 
 //Register Services
 builder.Services.AddScoped<IContactService, ContactService>();
 builder.Services.AddScoped<IFundService, FundService>();
+builder.Services.AddScoped<IFundRelationshipService, FundRelationshipService>();
+
 
 
 // Add CORS services

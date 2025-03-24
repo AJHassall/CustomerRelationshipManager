@@ -32,11 +32,21 @@
     dotnet run --project ContactManagementApi.csproj
     ```
 
-    This will launch the API on `https://localhost:7001` (or a similar port). The console output will indicate the exact URL.
+    This will launch the API on `https://localhost:8080` (or a similar port). The console output will indicate the exact URL.
+
+## Docker
+
+alternatively I have included a dockerfile for the api
+    ```bash
+        cd ContactManagementApi
+        docker build -t contact-management-api .
+        docker run -p 8080:8080 contact-management-api
+    ```
 
 5.  **Swagger:**
+    
     ```
-    https://localhost:7001/swagger/index.html
+    https://localhost:8080/swagger/index.html
     ```
 
 ## API Endpoints

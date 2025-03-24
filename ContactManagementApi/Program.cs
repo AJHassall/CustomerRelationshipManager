@@ -35,24 +35,21 @@ builder.Services.AddScoped<IFundService, FundService>();
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowClient",
-        builder => builder.WithOrigins("http://localhost:5173") 
-                          .AllowAnyMethod() 
+        builder => builder.WithOrigins("http://localhost:5173")
+                          .AllowAnyMethod()
                           .AllowAnyHeader());
 });
-
 
 var app = builder.Build();
 
 app.UseCors("AllowClient");
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
+app.UseSwagger();
+app.UseSwaggerUI();
 
-app.UseHttpsRedirection();
+
+//app.UseHttpsRedirection();
 
 app.UseAuthorization();
 

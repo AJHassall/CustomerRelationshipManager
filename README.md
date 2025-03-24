@@ -8,7 +8,7 @@
 1.  **Clone the Repository:**
 
     ```bash
-    git clone [https://github.com/AJHassall/InvestorFlow_Excercise.git](https://www.google.com/search?q=https://github.com/AJHassall/InvestorFlow_Excercise.git)
+    git clone https://github.com/AJHassall/InvestorFlow_Excercise.git
     cd InvestorFlow_Excercise
     ```
 

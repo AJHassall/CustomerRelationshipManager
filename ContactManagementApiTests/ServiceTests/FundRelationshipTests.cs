@@ -39,11 +39,11 @@ public class FundRelationshipServiceTests
     {
         int contactId = 1;
         int fundId = 1;
-        _mockFundRelationships.Setup(repo => repo.GetContactFundAssignment(contactId, fundId)).Returns((ContactFundAssignment)null);
+        _mockFundRelationships.Setup(repo => repo.GetContactFundAssignment(contactId, fundId)).Returns((FundRelationship)null);
 
         _service.AssignContactToFund(contactId, fundId);
 
-        _mockFundRelationships.Verify(repo => repo.CreateContactFundAssignment(It.Is<ContactFundAssignment>(a => a.ContactId == contactId && a.FundId == fundId)), Times.Once);
+        _mockFundRelationships.Verify(repo => repo.CreateContactFundAssignment(It.Is<FundRelationship>(a => a.ContactId == contactId && a.FundId == fundId)), Times.Once);
         _mockUnitOfWork.Verify(uow => uow.Complete(), Times.Once);
     }
 

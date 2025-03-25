@@ -8,6 +8,6 @@ namespace ContactManagementApi.Data
 
         public DbSet<Contact> Contacts { get; set; }
         public DbSet<Fund> Funds { get; set; }
-        public DbSet<ContactFundAssignment> ContactFundAssignments {get; set;}
+        public DbSet<FundRelationship> ContactFundAssignments {get; set;}
     }
 }

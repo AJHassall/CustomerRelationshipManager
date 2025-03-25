@@ -52,7 +52,7 @@ namespace ContactManagementApi.Services
                 throw new InvalidOperationException("Contact is already assigned to this fund.");
             }
 
-            var assignment = new ContactFundAssignment
+            var assignment = new FundRelationship
             {
                 ContactId = contactId,
                 FundId = fundId

@@ -13,6 +13,11 @@ namespace ContactManagementApi.Services
         {
             _unitOfWork = unitOfWork;
         }
+        public IEnumerable<FundRelationship> GetAll()
+        {
+            return _unitOfWork.FundRelationships.GetAll();
+        }
+
         public IEnumerable<Contact> GetContactsByFundId(int fundId)
         {
             return _unitOfWork.FundRelationships.GetContactsByFundId(fundId);
@@ -25,7 +30,7 @@ namespace ContactManagementApi.Services
                 throw new InvalidOperationException("Contact is already assigned to this fund.");
             }
 
-            var assignment = new ContactFundAssignment
+            var assignment = new FundRelationship
             {
                 ContactId = contactId,
                 FundId = fundId

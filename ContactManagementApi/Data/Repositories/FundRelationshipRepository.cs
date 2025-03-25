@@ -6,13 +6,17 @@ using ContactManagementApi.Data;
 
 namespace ContactManagementApi.Data.Repositories
 {
-    public class FundRelationshipRepository: IFundRelationshipRepository
+    public class FundRelationshipRepository : IFundRelationshipRepository
     {
         private readonly ContactDbContext _context;
 
         public FundRelationshipRepository(ContactDbContext context)
         {
             _context = context;
+        }
+        public IEnumerable<FundRelationship> GetAll()
+        {
+            return _context.ContactFundAssignments.ToList();
         }
 
         public IEnumerable<Contact> GetContactsByFundId(int fundId)
@@ -23,19 +27,21 @@ namespace ContactManagementApi.Data.Repositories
                 .ToList();
         }
 
-        public ContactFundAssignment GetContactFundAssignment(int contactId, int fundId)
+        public FundRelationship GetContactFundAssignment(int contactId, int fundId)
         {
-            return _context.ContactFundAssignments.Where(x => x.ContactId == contactId && x.FundId == fundId).FirstOrDefault();
+            return _context.ContactFundAssignments
+                .Where(x => x.ContactId == contactId && x.FundId == fundId)
+                .FirstOrDefault();
         }
 
-        public ContactFundAssignment CreateContactFundAssignment(ContactFundAssignment contactFundAssignment)
+        public FundRelationship CreateContactFundAssignment(FundRelationship contactFundAssignment)
         {
             _context.ContactFundAssignments.Add(contactFundAssignment);
             _context.SaveChanges();
             return contactFundAssignment;
         }
 
-        public void DeleteContactFundAssignment(ContactFundAssignment contactFundAssignment)
+        public void DeleteContactFundAssignment(FundRelationship contactFundAssignment)
         {
             _context.ContactFundAssignments.Remove(contactFundAssignment);
             _context.SaveChanges();

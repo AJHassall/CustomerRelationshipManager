@@ -65,8 +65,9 @@ https://localhost:8080/swagger/index.html
   * `PUT /api/funds/{id}`: Updates a fund.
   * `DELETE /api/funds/{id}`: Deletes a fund.
 * **Contact Fund Assignments:**
-  * `POST /api/contactfundassignments`: Creates a new contact-fund assignment.
-  * `DELETE /api/contactfundassignments`: Deletes a contact fund assignment.
+  * `GET /api/fundrelationship/{fundId}`: Creates a new contact-fund assignment.
+  * `POST /api/fundrelationship/{contactId}/funds/{fundId}`: Creates a new contact-fund assignment.
+  * `DELETE /api/fundrelationship/{contactId}/funds/{fundId}`: Deletes a contact fund assignment.
 
 ## Running Tests
 

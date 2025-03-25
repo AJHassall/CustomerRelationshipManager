@@ -26,7 +26,7 @@ namespace ContactManagementApi.Tests.Services
             // Arrange
             int contactId = 1;
             int fundId = 2;
-            _mockContactRepository.Setup(uow => uow.FundRelationships.GetContactFundAssignment(contactId, fundId)).Returns((FundRelationship)null);
+            _mockContactRepository.Setup(uow => uow.FundRelationships.GetFundsAssignedToContact(contactId)).Returns((FundRelationship)null);
             _mockContactRepository.Setup(uow => uow.FundRelationships.CreateContactFundAssignment(It.IsAny<FundRelationship>()));
 
             // Act
@@ -42,7 +42,7 @@ namespace ContactManagementApi.Tests.Services
             // Arrange
             int contactId = 1;
             int fundId = 2;
-            _mockContactRepository.Setup(uow => uow.FundRelationships.GetContactFundAssignment(contactId, fundId)).Returns(new FundRelationship());
+            _mockContactRepository.Setup(uow => uow.FundRelationships.GetFundsAssignedToContact(contactId)).Returns(new FundRelationship());
 
             // Act & Assert
             Assert.Throws<InvalidOperationException>(() => _contactService.AssignContactToFund(contactId, fundId));

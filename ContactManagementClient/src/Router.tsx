@@ -3,9 +3,19 @@ import { RootLayout } from "./Layout"; // Import the Layout component
 import { AssignContactsToFunds } from "./pages/AssignContactsToFunds.page";
 import { Funds } from "./pages/Funds.page";
 import { Contacts } from "./pages/Contacts.page";
+import Home from "./pages/Home.page";
 
 const router = createBrowserRouter(
   [
+    {
+      path: "/",
+      element: (
+        <RootLayout>
+          <Home />
+        </RootLayout>
+      ),
+
+    },
     {
       path: "/assign-contacts-to-funds",
       element: (

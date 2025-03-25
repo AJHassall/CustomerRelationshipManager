@@ -21,7 +21,7 @@ export function Contacts() {
   useEffect(() => {
     async function getContacts() {
       try {
-        const response = await fetch("https://localhost:7001/api/contacts", {
+        const response = await fetch("http://localhost:8080/api/contacts", {
           method: "GET",
           headers: {
             accept: "*/*",
@@ -43,7 +43,7 @@ export function Contacts() {
 
   const handleCreateContact = async () => {
     try {
-      const response = await fetch("https://localhost:7001/api/contacts/contacts", {
+      const response = await fetch("http://localhost:8080/api/contacts", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -67,7 +67,7 @@ export function Contacts() {
   const handleUpdateContact = async (updatedContact: Contact) => {
     try {
       const response = await fetch(
-        `https://localhost:7001/api/contacts/${updatedContact.contactId}`,
+        `http://localhost:8080/api/contacts/${updatedContact.contactId}`,
         {
           method: "PUT",
           headers: {
@@ -96,7 +96,7 @@ export function Contacts() {
   const handleDeleteContact = async (contactId: number) => {
     try {
       const response = await fetch(
-        `https://localhost:7001/api/contacts/${contactId}`,
+        `http://localhost:8080/api/contacts/${contactId}`,
         {
           method: "DELETE",
         }

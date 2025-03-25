@@ -10,9 +10,9 @@ namespace ContactManagementApi.Data.Repositories
     {
         IEnumerable<FundRelationship> GetAll();
         IEnumerable<Contact> GetContactsByFundId(int fundId);
-        FundRelationship GetContactFundAssignment(int contactId, int fundId);
+        FundRelationship GetFundsAssignedToContact(int contactId);
         FundRelationship CreateContactFundAssignment(FundRelationship contactFundAssignment);
         void DeleteContactFundAssignment(FundRelationship contactFundAssignment);
-
+        FundRelationship GetRelationship(int contactId, int fundId);
     }
 }

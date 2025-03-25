@@ -27,10 +27,10 @@ namespace ContactManagementApi.Data.Repositories
                 .ToList();
         }
 
-        public FundRelationship GetContactFundAssignment(int contactId, int fundId)
+        public FundRelationship GetFundsAssignedToContact(int contactId)
         {
             return _context.ContactFundAssignments
-                .Where(x => x.ContactId == contactId && x.FundId == fundId)
+                .Where(x => x.ContactId == contactId)
                 .FirstOrDefault();
         }
 
@@ -51,6 +51,14 @@ namespace ContactManagementApi.Data.Repositories
         {
             return _context.Contacts;
 
+        }
+
+        public FundRelationship GetRelationship(int contactId, int fundId)
+        {
+            return _context.ContactFundAssignments
+                    .Where(x => x.ContactId == contactId)
+                    .Where(x => x.FundId == fundId)
+                    .FirstOrDefault();
         }
     }
 }

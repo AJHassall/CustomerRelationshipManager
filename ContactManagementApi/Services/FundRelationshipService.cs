@@ -25,7 +25,7 @@ namespace ContactManagementApi.Services
 
         public void AssignContactToFund(int contactId, int fundId)
         {
-            if (_unitOfWork.FundRelationships.GetContactFundAssignment(contactId, fundId) != null)
+            if (_unitOfWork.FundRelationships.GetRelationship(contactId, fundId) != null)
             {
                 throw new InvalidOperationException("Contact is already assigned to this fund.");
             }
@@ -42,7 +42,7 @@ namespace ContactManagementApi.Services
 
         public void RemoveContactFromFund(int contactId, int fundId)
         {
-            var assignment = _unitOfWork.FundRelationships.GetContactFundAssignment(contactId, fundId);
+            var assignment = _unitOfWork.FundRelationships.GetRelationship(contactId, fundId);
             if (assignment == null)
             {
                 throw new InvalidOperationException("Contact is not assigned to this fund.");

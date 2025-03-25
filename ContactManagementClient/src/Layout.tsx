@@ -21,7 +21,7 @@ export function RootLayout({ children }: { children: React.ReactNode }) {
           </Stack>
         </Container>
       </AppShell.Navbar>
-      <AppShell.Main className={classes.content}>
+      <AppShell.Main className={classes.content} m={'5rem'}>
         <Box style={{ zIndex: 1, position: 'relative' }} bg={_bg}>
           {children}
         </Box>

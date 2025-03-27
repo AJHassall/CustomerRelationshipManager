@@ -24,8 +24,6 @@ namespace ContactManagementApi.Data.Repositories
         {
             return _context.Funds.ToList();
         }
-
-        //Potentially added for testing purposes.
         public Fund CreateFund(Fund fund)
         {
             _context.Funds.Add(fund);

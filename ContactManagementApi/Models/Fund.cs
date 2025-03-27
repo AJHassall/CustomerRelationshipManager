@@ -1,4 +1,6 @@
 using System.ComponentModel.DataAnnotations;
+using ContactManagementApi.Data;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ContactManagementApi.Models
 {
@@ -10,6 +12,8 @@ namespace ContactManagementApi.Models
         [Required]
         [MinLength(3)]
         public required string Name { get; set; }
+
+
 
     }
 }

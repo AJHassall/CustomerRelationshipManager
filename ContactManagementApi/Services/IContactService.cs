@@ -12,9 +12,6 @@ namespace ContactManagementApi.Services
         IEnumerable<Contact> GetContacts();
         Contact UpdateContact(Contact contact);
         void DeleteContact(int id);
-        IEnumerable<Contact> GetContactsByFundId(int fundId);
-        void AssignContactToFund(int contactId, int fundId);
-        void RemoveContactFromFund(int contactId, int fundId);
 
     }
 }

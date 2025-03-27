@@ -1,41 +1,46 @@
 using System.Collections.Generic;
-using ContactManagementApi.Models; 
-using ContactManagementApi.Data.Repositories;
+    using ContactManagementApi.Models;
+    using ContactManagementApi.Data.Repositories;
 
-namespace ContactManagementApi.Services
-{
-    public class FundService : IFundService
+    namespace ContactManagementApi.Services
     {
-        private readonly IFundRepository _fundRepository;
-
-        public FundService(IFundRepository fundRepository)
+        public class FundService : IFundService
         {
-            _fundRepository = fundRepository;
-        }
+            private readonly IUnitOfWork _unitOfWork;
 
-        public Fund GetFundById(int id)
-        {
-            return _fundRepository.GetFundById(id);
-        }
+            public FundService(IUnitOfWork unitOfWork)
+            {
+                _unitOfWork = unitOfWork;
+            }
 
-        public IEnumerable<Fund> GetAllFunds()
-        {
-            return _fundRepository.GetAllFunds();
-        }
+            public Fund GetFundById(int id)
+            {
+                return _unitOfWork.Funds.GetFundById(id);
+            }
 
-        public Fund CreateFund(Fund fund)
-        {
-            return _fundRepository.CreateFund(fund);
-        }
+            public IEnumerable<Fund> GetAllFunds()
+            {
+                return _unitOfWork.Funds.GetAllFunds();
+            }
 
-        public Fund UpdateFund(Fund fund)
-        {
-            return _fundRepository.UpdateFund(fund);
-        }
+            public Fund CreateFund(Fund fund)
+            {
+                _unitOfWork.Funds.CreateFund(fund);
+                _unitOfWork.Complete();
+                return fund;
+            }
 
-        public void DeleteFund(int id)
-        {
-            _fundRepository.DeleteFund(id);
+            public Fund UpdateFund(Fund fund)
+            {
+                _unitOfWork.Funds.UpdateFund(fund);
+                _unitOfWork.Complete();
+                return fund;
+            }
+
+            public void DeleteFund(int id)
+            {
+                _unitOfWork.Funds.DeleteFund(id);
+                _unitOfWork.Complete();
+            }
         }
     }
-}

@@ -11,14 +11,10 @@ namespace ContactManagementApi.Data.Repositories
         Contact CreateContact(Contact contact);
         Contact GetContactById(int id);
         IQueryable<Contact> GetContacts();
-
         IEnumerable<Contact> GetAllContacts();
         Contact UpdateContact(Contact contact);
         void DeleteContact(int id);
-        IEnumerable<Contact> GetContactsByFundId(int fundId);
-        ContactFundAssignment GetContactFundAssignment(int contactId, int fundId);
-        ContactFundAssignment CreateContactFundAssignment(ContactFundAssignment contactFundAssignment);
-        void DeleteContactFundAssignment(ContactFundAssignment contactFundAssignment);
+
 
     }
 }

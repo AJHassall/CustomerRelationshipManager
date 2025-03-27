@@ -7,73 +7,65 @@ namespace ContactManagementApi.Services
 {
     public class ContactService : IContactService
     {
-        private readonly IContactRepository _contactRepository;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public ContactService(IContactRepository contactRepository)
+        public ContactService(IUnitOfWork unitOfWork)
         {
-            _contactRepository = contactRepository;
+            _unitOfWork = unitOfWork;
         }
 
         public Contact CreateContact(Contact contact)
         {
-            return _contactRepository.CreateContact(contact);
+            return _unitOfWork.Contacts.CreateContact(contact);
         }
 
         public Contact GetContactById(int id)
         {
-            return _contactRepository.GetContactById(id);
+            return _unitOfWork.Contacts.GetContactById(id);
         }
 
         public Contact UpdateContact(Contact contact)
         {
-            return _contactRepository.UpdateContact(contact);
+            return _unitOfWork.Contacts.UpdateContact(contact);
         }
 
-        public void DeleteContact(int id)
+        public void DeleteContact(int contactId)
         {
-            if (_contactRepository.GetContactFundAssignment(id, 0) != null)
+            if (_unitOfWork.FundRelationships.GetFundsAssignedToContact(contactId) != null)
             {
                 throw new InvalidOperationException("Contact is currently assigned to a fund and cannot be deleted.");
             }
 
-            _contactRepository.DeleteContact(id);
+            _unitOfWork.Contacts.DeleteContact(contactId);
+            _unitOfWork.Complete();
         }
 
         public IEnumerable<Contact> GetContactsByFundId(int fundId)
         {
-            return _contactRepository.GetContactsByFundId(fundId);
+            return _unitOfWork.FundRelationships.GetContactsByFundId(fundId);
         }
 
         public void AssignContactToFund(int contactId, int fundId)
         {
-            if (_contactRepository.GetContactFundAssignment(contactId, fundId) != null)
+            if (_unitOfWork.FundRelationships.GetFundsAssignedToContact(contactId) != null)
             {
                 throw new InvalidOperationException("Contact is already assigned to this fund.");
             }
 
-            var assignment = new ContactFundAssignment
+            var assignment = new FundRelationship
             {
                 ContactId = contactId,
                 FundId = fundId
             };
 
-            _contactRepository.CreateContactFundAssignment(assignment);
-        }
+            _unitOfWork.FundRelationships.CreateContactFundAssignment(assignment);
+            _unitOfWork.Complete();
 
-        public void RemoveContactFromFund(int contactId, int fundId)
-        {
-            var assignment = _contactRepository.GetContactFundAssignment(contactId, fundId);
-            if (assignment == null)
-            {
-                throw new InvalidOperationException("Contact is not assigned to this fund.");
-            }
-
-            _contactRepository.DeleteContactFundAssignment(assignment);
         }
 
         public IEnumerable<Contact> GetContacts()
         {
-            return _contactRepository.GetContacts();
+            return _unitOfWork.Contacts.GetContacts();
         }
     }
 }

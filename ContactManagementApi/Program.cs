@@ -22,37 +22,40 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<ContactManagementApi.Data.ContactDbContext>(options =>
     options.UseInMemoryDatabase("ContactManagementDb")
 );
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 // Register Repositories
 builder.Services.AddScoped<IContactRepository, ContactRepository>();
 builder.Services.AddScoped<IFundRepository, FundRepository>();
+builder.Services.AddScoped<IFundRelationshipRepository, FundRelationshipRepository>();
+
 
 //Register Services
 builder.Services.AddScoped<IContactService, ContactService>();
 builder.Services.AddScoped<IFundService, FundService>();
+builder.Services.AddScoped<IFundRelationshipService, FundRelationshipService>();
+
+
 
 // Add CORS services
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowClient",
-        builder => builder.WithOrigins("http://localhost:5173") 
-                          .AllowAnyMethod() 
+        builder => builder.WithOrigins("http://localhost:5173")
+                          .AllowAnyMethod()
                           .AllowAnyHeader());
 });
-
 
 var app = builder.Build();
 
 app.UseCors("AllowClient");
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
+app.UseSwagger();
+app.UseSwaggerUI();
 
-app.UseHttpsRedirection();
+
+//app.UseHttpsRedirection();
 
 app.UseAuthorization();
 

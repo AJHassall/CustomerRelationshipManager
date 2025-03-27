@@ -15,6 +15,12 @@ namespace ContactManagementApi.Controllers
         {
             _fundService = fundService;
         }
+        [HttpGet]
+        public IActionResult GetAll()
+        {
+            var fund = _fundService.GetAllFunds();
+            return Ok(fund);
+        }
 
         [HttpGet("{id}")]
         public IActionResult GetFundById(int id)

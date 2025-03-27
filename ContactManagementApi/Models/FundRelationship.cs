@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ContactManagementApi.Models
 {
-    public class ContactFundAssignment
+    public class FundRelationship
     {
         [Key]
         public int ContactFundAssignmentId { get; private set; }

@@ -4,8 +4,8 @@
 1. **Clone the Repository:**
 
     ```bash
-    git clone https://github.com/AJHassall/InvestorFlow_Excercise.git
-    cd InvestorFlow_Excercise/ContactManagementApi
+    git clone https://github.com/AJHassall/ContentManagmentSystem.git
+    cd Owner avatar ContentManagmentSystem/ContactManagementApi
     ```
 
 2. **Restore Dependencies:**

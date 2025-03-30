@@ -4,7 +4,7 @@
 1. **Clone the Repository:**
 
     ```bash
-    git clone https://github.com/AJHassall/ContentManagmentSystem.git
+    git clone https://github.com/AJHassall/CustomerRelationshipManager.git
     cd Owner avatar ContentManagmentSystem/ContactManagementApi
     ```
 

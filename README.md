@@ -5,7 +5,7 @@
 
     ```bash
     git clone https://github.com/AJHassall/CustomerRelationshipManager.git
-    cd Owner avatar ContentManagmentSystem/ContactManagementApi
+    cd CustomerRelationshipManager/ContactManagementApi
     ```
 
 2. **Restore Dependencies:**
